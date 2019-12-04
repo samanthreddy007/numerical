@@ -11,11 +11,10 @@ import numpy as np
 from scipy.linalg import solve
 from numpy import linalg as LA
 import timeit
-import random
 import matplotlib.pyplot as plt
+from numpy import random
 
 
-#Your statements here
 
 class Algorithms():
     
@@ -256,7 +255,43 @@ class Algorithms():
         ax.set_title('w vs spec_radius')
         ax.plot([ p for p in np.arange(0,2,0.2)], spec_rad_list)            
         ax.grid(True)
-       
-                
-            
+    
+    def rate_plots(self,d):
+        x=Algorithms(d)
+        w=0.5
+        x_g,error_l_g,max_iteration_g,spec_rad_g,time_g = x.gauss(float('inf'),1E-15)
+        x_j,error_l_j,max_iteration_j,spec_rad_j,time_j = x.jacobi(float('inf'),1E-15)
+        x_s,error_l_s,max_iteration_s,spec_rad_s,time_s = x.SOR(float('inf'),1E-15,w)
+
+        fig,ax = plt.subplots()
+        
+        ax.set_title('Error vs Iterations')
+        m=min(len(error_l_g),len(error_l_j),len(error_l_s))
+        x_axis_coord=[p for p in range(m)]
+        ax.plot(x_axis_coord, error_l_g[:m],label = 'Gauss')
+        ax.plot(x_axis_coord, error_l_j[:m],label = 'Jacobi')
+        ax.plot(x_axis_coord, error_l_s[:m],label = 'SOR ('+str(w)+')')    
+        ax.legend()        
+        ax.grid(True)
+        
+
+               
+if __name__=='__main__':
+    alg=Algorithms(10)
+    
+    max_iterations_=float('inf')
+    max_error=1E-15
+    w=0.01
+    msize=10
+    
+    ## uncomment each line and run individually
+    #alg.gauss(max_iterations_,max_error)
+   # alg.jacobi(max_iterations_,max_error)
+   # alg.SOR(max_iterations_,max_error,w)
+   # alg.plots("gauss")
+   # alg.plots("jacobi")
+   # alg.plots("sor")
+   # alg.plots("all")
+   # alg.SOR_plot(msize)
+    alg.rate_plots(10)
             
