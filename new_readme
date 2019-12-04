@@ -1,0 +1,11 @@
+alg=Algorithms(10) will create the A,b, x_initial=[1]*dim
+alg.gauss(n,max_error) will run gauss seidel and written last_x,error_list,max_iteration number,spectral_radius,stop - start 
+alg.jacobi(n,max_error) will run jacobi and written last_x,error_list,max_iteration number,spectral_radius,stop - start 
+alg.SOR(n,max_error,w) will run SOR and written last_x,error_list,max_iteration number,spectral_radius,stop - start 
+alg.plots("gauss") will plot 3 plots for gauss seidal 'size vs iterations','size vs time' and size vs spectral_radius'
+alg.plots("jacobi") will plot 3 plots for jacobi 'size vs iterations','size vs time' and size vs spectral_radius'
+alg.plots("SOR") will plot 3 plots for SOR 'size vs iterations','size vs time' and size vs spectral_radius'
+alg.plots("all") will plot 3 plots for all 3 algos to compare 'size vs iterations','size vs time' and size vs spectral_radius'
+alg.SOR_plot(msize) will plot spectral radius vs w to find optimal w
+
+
