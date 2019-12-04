@@ -1,7 +1,5 @@
 
 
-
-
 # -*- coding: utf-8 -*-
 """
 Created on Mon Dec  2 19:32:05 2019
@@ -105,7 +103,7 @@ class Algorithms():
         return x,error_list,i,spectral_radius,stop - start 
 
         
-    def SOR(self,n,max_error,w=None):
+    def SOR(self,n,max_error,w):
         x=self.x_initial
         D_L = np.tril(self.A)
         D = np.diag(np.diag(self.A))
@@ -125,9 +123,9 @@ class Algorithms():
             spectral_radiusj = np.max(np.abs(eigsTj))
             w_=2/(1+np.sqrt(1-(spectral_radiusj**2)))
             return w_
-        optimal_w=opt_w(D,L,U)
-        if w==None:    
-            w=optimal_w
+        #optimal_w=opt_w(D,L,U)
+        #if w==None:    
+        #    w=optimal_w
             
         T = np.linalg.solve(-(D+(w*L)),((1-w)*L)+U)
         eigsT, _ = np.linalg.eig(T)
@@ -243,7 +241,7 @@ class Algorithms():
                         
                         return x, iteration,seed, timeit.default_timer() - start
 
-    def plots(self,algo):
+    def plots(self,algo,w=1.5):
         
         max_iteration_list=[]
         size_list=[]
@@ -261,11 +259,11 @@ class Algorithms():
             elif algo=='jacobi':
                 x_,error_l,max_iteration,spec_rad,time = x.jacobi(float('inf'),1E-15)
             elif algo=='sor':
-                x_,error_l,max_iteration,spec_rad,time = x.SOR(float('inf'),1E-15)
+                x_,error_l,max_iteration,spec_rad,time = x.SOR(float('inf'),1E-15,w)
             elif algo=='all':
                 x_g,error_l_g,max_iteration_g,spec_rad_g,time_g = x.gauss(float('inf'),1E-15)
                 x_j,error_l_j,max_iteration_j,spec_rad_j,time_j = x.jacobi(float('inf'),1E-15)
-                x_s,error_l_s,max_iteration_s,spec_rad_s,time_s = x.SOR(float('inf'),1E-15)
+                x_s,error_l_s,max_iteration_s,spec_rad_s,time_s = x.SOR(float('inf'),1E-15,w)
                 size = size_list[:]
                 
    #             error_list_g.append(error_l_g)
@@ -396,7 +394,7 @@ if __name__=='__main__':
     
     max_iterations_=float('inf')
     max_error=1E-15
-    w=0.01
+    w=1.5
     msize=10
     
     ## uncomment each line and run individually
@@ -405,10 +403,9 @@ if __name__=='__main__':
    # alg.SOR(max_iterations_,max_error,w)
    # alg.plots("gauss")
    # alg.plots("jacobi")
-   # alg.plots("sor")
+    #alg.plots("sor",w)
     alg.plots("all")
    # alg.SOR_plot(msize)
     #alg.TriangleAlgo(max_error)
     #alg.rate_plots(10)
-            
             
