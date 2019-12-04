@@ -7,5 +7,5 @@ alg.plots("jacobi") will plot 3 plots for jacobi 'size vs iterations','size vs t
 alg.plots("SOR") will plot 3 plots for SOR 'size vs iterations','size vs time' and size vs spectral_radius'
 alg.plots("all") will plot 3 plots for all 3 algos to compare 'size vs iterations','size vs time' and size vs spectral_radius'
 alg.SOR_plot(msize) will plot spectral radius vs w to find optimal w
-
+alg.rate_plots(10) will plot error vs iterations for each algo
 
